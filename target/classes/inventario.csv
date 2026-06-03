@@ -1,0 +1,26 @@
+cod_item,descricao,categoria,qtd_atual
+901,Parafuso Sextavado,Ferragens,15
+902,Porca Auto Travante,Ferragens,52
+903,Arruela Lisa,Ferragens,0
+904,Chapa de Aco Carbono,Metais,8
+905,Barra de Aluminio,Metais,35
+906,Tubo de Cobre,Metais,2
+907,Fio Eletrico 2.5mm,Eletrica,120
+908,Disjuntor Bipolar 32A,Eletrica,6
+909,Tomada 3 Pinos,Eletrica,0
+910,Tinta Acrilica Branca,Acabamento,18
+911,Rolo de Pintura,Acabamento,4
+912,Lixa Massa 220,Acabamento,75
+913,Cimento CP-II,Construcao,10
+914,Areia Media,Construcao,3
+915,Brita No1,Construcao,6
+916,Cano PVC 100mm,Hidraulica,14
+917,Joelho PVC 90,Hidraulica,67
+918,Registro de Presso,Hidraulica,1
+919,Silicone Vedante,Quimicos,28
+920,Cola Epoxi,Quimicos,5
+921,Solda Estanho,Ferramentas,12
+922,Martelo Unha,Ferramentas,7
+923,Chave Philips,Ferramentas,0
+924,Serra Manual,Ferramentas,9
+925,Furadeira Impacto,Ferramentas,2

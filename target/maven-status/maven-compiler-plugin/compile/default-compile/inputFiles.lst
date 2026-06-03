@@ -1,0 +1,7 @@
+/app/src/main/java/br/edu/ufrgs/controller/ServletInventario.java
+/app/src/main/java/br/edu/ufrgs/model/Categoria.java
+/app/src/main/java/br/edu/ufrgs/model/Produto.java
+/app/src/main/java/br/edu/ufrgs/repository/GeradorSaidaCSV.java
+/app/src/main/java/br/edu/ufrgs/repository/LeitorArquivo.java
+/app/src/main/java/br/edu/ufrgs/repository/LeitorCSV.java
+/app/src/main/java/br/edu/ufrgs/test/MainTesteCSV.java
