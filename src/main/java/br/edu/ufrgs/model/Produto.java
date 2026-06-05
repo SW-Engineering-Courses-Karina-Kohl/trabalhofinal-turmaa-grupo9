@@ -3,16 +3,24 @@ package br.edu.ufrgs.model;
 
 public class Produto {
 
-    private String codigo;
-    private String descricao;
+    private final String codigo;
+    private final String descricao;
     private int qtdAtual;
-    private Categoria categoria;
+    private final Categoria categoria;
 
-    public Produto(String codigo,
-                   String descricao,
-                   int qtdAtual,
-                   Categoria categoria) {
-
+    public Produto(String codigo, String descricao, int qtdAtual, Categoria categoria) {
+        if(codigo == null||codigo.isEmpty()){
+            throw new IllegalArgumentException("Código inválido.");
+        }
+        if(descricao == null||descricao.isEmpty()){
+            throw new IllegalArgumentException("Descrição inválida.");
+        }
+        if(qtdAtual < 0){
+            throw new IllegalArgumentException("Quantidade inserida inválida.");
+        }
+        if(categoria == null){
+            throw new IllegalArgumentException("Categoria não inserida.");
+        }
         this.codigo = codigo;
         this.descricao = descricao;
         this.qtdAtual = qtdAtual;
@@ -36,6 +44,9 @@ public class Produto {
     }
 
     public void setQtdAtual(int qtdAtual) {
+        if(qtdAtual<0){
+            throw new IllegalArgumentException("Quantidade inválida.");
+        }
         this.qtdAtual = qtdAtual;
     }
 }
