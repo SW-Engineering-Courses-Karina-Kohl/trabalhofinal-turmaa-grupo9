@@ -26,7 +26,8 @@ public class GerenciaEstoque {
 
     public void carregarProdutos(String caminhoArquivo) {
         LeitorCSV leitor = new LeitorCSV(caminhoArquivo);
-        // Utiliza o leitor passando a lista de categorias, conforme a implementação da equipe
+        // Utiliza o leitor passando a lista de categorias, conforme a implementação da
+        // equipe
         this.listaProdutos = leitor.lerProdutos(this.listaCategorias);
     }
 
@@ -36,8 +37,9 @@ public class GerenciaEstoque {
             if (precisaReposicao(produto)) {
                 int sugestao = calcularSugestaoCompra(produto);
                 String prioridade = definirPrioridade(produto);
-                
-                // TODO: Pessoal, descomentem as linhas abaixo quando a classe Produto tiver os atributos para o RF04!
+
+                // TODO: Pessoal, descomentem as linhas abaixo quando a classe Produto tiver os
+                // atributos para o RF04!
                 // produto.setSugestaoCompra(sugestao);
                 // produto.setPrioridade(prioridade);
             } else {
@@ -46,8 +48,9 @@ public class GerenciaEstoque {
                 // produto.setPrioridade("Normal");
             }
         }
-        
-        // TODO: Ajustar a chamada abaixo quando o GeradorSaidaCSV estiver preparado para receber a lista
+
+        // TODO: Ajustar a chamada abaixo quando o GeradorSaidaCSV estiver preparado
+        // para receber a lista
         // GeradorSaidaCSV gerador = new GeradorSaidaCSV("saida_reposicao.csv");
         // gerador.exportar(listaProdutos);
     }
@@ -90,7 +93,7 @@ public class GerenciaEstoque {
         }
         return false;
     }
-    
+
     // Método extra para auxiliar a equipe no acesso aos dados processados
     public List<Produto> getListaProdutos() {
         return listaProdutos;
