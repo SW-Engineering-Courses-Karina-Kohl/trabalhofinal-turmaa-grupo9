@@ -23,6 +23,12 @@ public class LeitorCSV implements LeitorArquivo {
         this.nomeArquivo = nomeArquivo;
     }
 
+    @Override
+    public List<?> ler(String caminho) {
+        this.nomeArquivo = caminho;
+        return new ArrayList<>();
+    }
+    
     /**
      * Lê o arquivo CSV de configuração de categorias.
      * 
