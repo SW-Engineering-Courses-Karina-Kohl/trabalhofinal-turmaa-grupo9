@@ -11,6 +11,12 @@
             <version>6.0.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.9.3</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <finalName>ROOT</finalName>
@@ -20,8 +26,18 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.2</version>
             </plugin>
+             <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.11.0.3922</version>
+            </plugin>
         </plugins>
     </build>
+    <properties>
+        <sonar.projectKey>trabalho-final</sonar.projectKey>
+        <sonar.projectName>Trabalho Final</sonar.projectName>
+        <sonar.host.url>http://localhost:9000</sonar.host.url>
+    </properties>
 </project>
 
 

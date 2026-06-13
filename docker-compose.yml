@@ -4,3 +4,22 @@ services:
     ports:
       - "8080:8080"
     container_name: servlet-container
+    volumes:
+      - ./saida:/saida
+
+  test:
+    image: maven:3.9-eclipse-temurin-17
+    command: mvn test
+    working_dir: /app
+    volumes:
+      - .:/app
+      - maven_cache:/root/.m2
+
+  sonarqube:
+    image: sonarqube:community
+    container_name: sonarqube
+    ports:
+      - "9000:9000"
+
+volumes:
+  maven_cache:
