@@ -1,6 +1,7 @@
 package br.edu.ufrgs.controller;
 
 import br.edu.ufrgs.model.Produto;
+import br.edu.ufrgs.repository.GeradorSaidaCSV;
 import br.edu.ufrgs.repository.GerenciaEstoque;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig; //n
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 @WebServlet("/inventario")
 @MultipartConfig
@@ -67,8 +69,12 @@ public class ServletInventario extends HttpServlet {
 
             gerencia.carregarProdutos(caminhoCompleto);
 
-            gerencia.verificarNecessidadeReposicao(CAMINHO_SAIDA);
+            List<Produto> listaProdutos = gerencia.verificarNecessidadeReposicao(CAMINHO_SAIDA);
 
+            // Gera o arquivo final com as sugestões de compra
+            GeradorSaidaCSV gerador = new GeradorSaidaCSV(CAMINHO_SAIDA);
+            gerador.exportar(listaProdutos);
+            
             request.setAttribute("produtos", gerencia.getListaProdutos());
 
             for (Produto produto : gerencia.getListaProdutos()) {

@@ -29,7 +29,7 @@ public class GerenciaEstoque {
         this.listaProdutos = leitor.lerProdutos(this.listaCategorias);
     }
 
-    public void verificarNecessidadeReposicao(String caminhoArquivoSaida) {
+    public List<Produto> verificarNecessidadeReposicao(String caminhoArquivoSaida) {
         for (Produto produto : listaProdutos) {
             // RF02 - Motor de Reposição: Compara quantidade_atual com o ponto_de_pedido
             if (precisaReposicao(produto)) {
@@ -44,10 +44,8 @@ public class GerenciaEstoque {
                 produto.setPrioridade("Normal");
             }
         }
+        return listaProdutos;
 
-        // Gera o arquivo final com as sugestões de compra
-        GeradorSaidaCSV gerador = new GeradorSaidaCSV(caminhoArquivoSaida);
-        gerador.exportar(listaProdutos);
     }
 
     // --- Métodos Privados (-) ---
@@ -66,15 +64,6 @@ public class GerenciaEstoque {
             return "Alta";
         }
         return "Média";
-    }
-
-    private Categoria buscarCategoriaPorNome(String nome) {
-        for (Categoria cat : listaCategorias) {
-            if (cat.getNome().equalsIgnoreCase(nome)) {
-                return cat;
-            }
-        }
-        return null;
     }
 
     private boolean estaZerado(Produto produto) {
