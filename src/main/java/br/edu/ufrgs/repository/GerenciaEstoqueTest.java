@@ -20,6 +20,7 @@ public class GerenciaEstoqueTest{
         categoriaDispositivos = new Categoria("Dispositivos", 5, 50, 10);;
     }
 
+    
     // Testa a prioridade alta para quando o estoque estiver zerado (quantidade atual = 0).
     @Test
     public void testPrioridadeAltaQuandoZerado(){
