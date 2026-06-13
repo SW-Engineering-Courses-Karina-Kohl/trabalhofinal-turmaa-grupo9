@@ -33,7 +33,7 @@ public class GeradorSaidaCSV {
     }
 
     private String gerarCabecalho() {
-        return "codigo,descricao,categoria,qtdAtual";
+        return "codigo,descricao,categoria,qtdAtual,sugestao_compra,prioridade";
     }
 
     private String formatarLinha(Produto produto) {
@@ -42,5 +42,7 @@ public class GeradorSaidaCSV {
                 + produto.getDescricao() + ","
                 + produto.getCategoria().getNome() + ","
                 + produto.getQtdAtual();
+                + produto.getSugestaoCompra() + ","
+                + produto.getPrioridade();
     }
 }
