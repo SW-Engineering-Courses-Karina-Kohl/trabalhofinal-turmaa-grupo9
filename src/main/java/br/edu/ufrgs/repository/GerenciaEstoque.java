@@ -29,7 +29,7 @@ public class GerenciaEstoque {
         this.listaProdutos = leitor.lerProdutos(this.listaCategorias);
     }
 
-    public void verificarNecessidadeReposicao() {
+    public void verificarNecessidadeReposicao(String caminhoArquivoSaida) {
         for (Produto produto : listaProdutos) {
             // RF02 - Motor de Reposição: Compara quantidade_atual com o ponto_de_pedido
             if (precisaReposicao(produto)) {
@@ -46,7 +46,7 @@ public class GerenciaEstoque {
         }
 
         // Gera o arquivo final com as sugestões de compra
-        GeradorSaidaCSV gerador = new GeradorSaidaCSV("saida.csv");
+        GeradorSaidaCSV gerador = new GeradorSaidaCSV(caminhoArquivoSaida);
         gerador.exportar(listaProdutos);
     }
 

@@ -12,10 +12,15 @@ import jakarta.servlet.http.Part; //n
 
 import java.io.File; //n
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @WebServlet("/inventario")
 @MultipartConfig
 public class ServletInventario extends HttpServlet {
+
+    private static final String CAMINHO_SAIDA = "/saida/saida_reposicao.csv";
 
     @Override
     protected void doPost(HttpServletRequest request,
@@ -40,6 +45,11 @@ public class ServletInventario extends HttpServlet {
                 pasta.mkdirs();
             }
 
+            Path diretorioSaida = Paths.get(CAMINHO_SAIDA).getParent();
+            if (diretorioSaida != null) {
+                Files.createDirectories(diretorioSaida);
+            }
+
             // Nome original do arquivo
             String nomeArquivo = arquivoInventario.getSubmittedFileName();
 
@@ -56,6 +66,8 @@ public class ServletInventario extends HttpServlet {
             gerencia.carregarCategorias(caminhoCategorias);
 
             gerencia.carregarProdutos(caminhoCompleto);
+
+            gerencia.verificarNecessidadeReposicao(CAMINHO_SAIDA);
 
             request.setAttribute("produtos", gerencia.getListaProdutos());
 
