@@ -29,7 +29,7 @@ public class GerenciaEstoque {
         this.listaProdutos = leitor.lerProdutos(this.listaCategorias);
     }
 
-    public List<Produto> verificarNecessidadeReposicao() {
+    public void verificarNecessidadeReposicao() {
         for (Produto produto : listaProdutos) {
             // RF02 - Motor de Reposição: Compara quantidade_atual com o ponto_de_pedido
             if (precisaReposicao(produto)) {
@@ -45,7 +45,9 @@ public class GerenciaEstoque {
             }
         }
 
-        return listaProdutos;
+        // Gera o arquivo final com as sugestões de compra
+        GeradorSaidaCSV gerador = new GeradorSaidaCSV("saida.csv");
+        gerador.exportar(listaProdutos);
     }
 
     // --- Métodos Privados (-) ---

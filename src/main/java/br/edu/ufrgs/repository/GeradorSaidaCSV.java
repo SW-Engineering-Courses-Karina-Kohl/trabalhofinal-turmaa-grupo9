@@ -41,7 +41,7 @@ public class GeradorSaidaCSV {
         return produto.getCodigo() + ","
                 + produto.getDescricao() + ","
                 + produto.getCategoria().getNome() + ","
-                + produto.getQtdAtual() + ","
+                + produto.getQtdAtual();
                 + produto.getSugestaoCompra() + ","
                 + produto.getPrioridade();
     }

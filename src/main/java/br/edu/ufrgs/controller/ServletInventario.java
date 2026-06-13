@@ -1,10 +1,7 @@
 package br.edu.ufrgs.controller;
 
-import br.edu.ufrgs.model.Categoria;
 import br.edu.ufrgs.model.Produto;
-import br.edu.ufrgs.repository.GeradorSaidaCSV;
 import br.edu.ufrgs.repository.GerenciaEstoque;
-import br.edu.ufrgs.repository.LeitorCSV;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig; //n
 import jakarta.servlet.annotation.WebServlet;
@@ -15,9 +12,6 @@ import jakarta.servlet.http.Part; //n
 
 import java.io.File; //n
 import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.List;
-
 
 @WebServlet("/inventario")
 @MultipartConfig
@@ -37,49 +31,37 @@ public class ServletInventario extends HttpServlet {
                 throw new IllegalArgumentException("Selecione um arquivo CSV de inventario.");
             }
 
-            // -----
-            // pasta de uploads (pode ser getRealPath ou um diretório absoluto)
+            // Pasta onde o arquivo será salvo
             String pastaUploads = getServletContext().getRealPath("/uploads");
-            File pasta = new File(pastaUploads);
-            if (!pasta.exists()) pasta.mkdirs();
 
-            // nome seguro do arquivo
-            String nomeArquivo = Paths.get(arquivoInventario.getSubmittedFileName()).getFileName().toString();
+            File pasta = new File(pastaUploads);
+
+            if (!pasta.exists()) {
+                pasta.mkdirs();
+            }
+
+            // Nome original do arquivo
+            String nomeArquivo = arquivoInventario.getSubmittedFileName();
+
+            // Caminho completo
             String caminhoCompleto = pastaUploads + File.separator + nomeArquivo;
 
-            // salva no disco o arquivo enviado
+            // Salva o arquivo
             arquivoInventario.write(caminhoCompleto);
 
-            LeitorCSV leitorCategorias =
-            new LeitorCSV("src/main/java/config_estoque.csv");
-            
-            List<Categoria> categorias =
-            leitorCategorias.lerCategorias();
-            
-            System.out.println("Categorias carregadas: "
-            + categorias.size());
-        
-            LeitorCSV leitorProdutos =
-            new LeitorCSV(caminhoCompleto);
-
-            List<Produto> produtos =
-            leitorProdutos.lerProdutos(categorias);
-
             GerenciaEstoque gerencia = new GerenciaEstoque();
-            
-            gerencia.carregarCategorias("src/main/java/config_estoque.csv");
+
+            String caminhoCategorias = getServletContext().getRealPath("config_estoque.csv");
+
+            gerencia.carregarCategorias(caminhoCategorias);
+
             gerencia.carregarProdutos(caminhoCompleto);
 
-            produtos = gerencia.verificarNecessidadeReposicao();
+            request.setAttribute("produtos", gerencia.getListaProdutos());
 
-            
-            // Gera o arquivo final com as sugestões de compra
-            GeradorSaidaCSV gerador = new GeradorSaidaCSV("saida.csv");
-            
-            gerador.exportar(produtos);
-
-
-
+            for (Produto produto : gerencia.getListaProdutos()) {
+                System.out.println(produto.getDescricao());
+            }
         } catch (Exception e) {
             request.setAttribute("erro", e.getMessage());
         }
