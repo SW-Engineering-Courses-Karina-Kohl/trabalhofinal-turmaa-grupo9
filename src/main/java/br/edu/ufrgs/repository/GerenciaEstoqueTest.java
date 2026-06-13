@@ -17,7 +17,7 @@ public class GerenciaEstoqueTest{
     public void setUp(){
         // Cria uma categoria para testar com ponto de pedido 10 e lote padrão 50.
         gerenciaEstoque = new GerenciaEstoque();
-        categoriaDispositivos = new Categoria("Dispositivos", 10, 50);
+        categoriaDispositivos = new Categoria("Dispositivos", 5, 50, 10);;
     }
 
     // Testa a prioridade alta para quando o estoque estiver zerado (quantidade atual = 0).
